@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "agrosync_tb_login")
+@Table(name = "tb_as_login")
 public class Login {
 
     @Id

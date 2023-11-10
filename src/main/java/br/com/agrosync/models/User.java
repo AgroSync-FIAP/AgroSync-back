@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "agrosync_tb_user")
+@Table(name = "tb_as_user")
 public class User {
 
     @Id

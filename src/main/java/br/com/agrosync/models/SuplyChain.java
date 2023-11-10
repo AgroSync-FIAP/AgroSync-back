@@ -13,7 +13,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "agrosync_tb_suplychain")
+@Table(name = "tb_as_suplychain")
 public class SuplyChain {
 
     @Id

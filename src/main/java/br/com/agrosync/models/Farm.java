@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_farm")
+@Table(name = "tb_as_farm")
 public class Farm {
 
     @Id

@@ -1,30 +1,17 @@
 package br.com.agrosync.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class RestErrorResponse {
+
     private String message;
+
     private List<String> errors;
-
-    public RestErrorResponse(String message, List<String> errors) {
-        this.message = message;
-        this.errors = errors;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
-    
 }

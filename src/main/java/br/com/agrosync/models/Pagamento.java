@@ -15,7 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "agrosync_tb_pagamento")
+@Table(name = "tb_as_pagamento")
 public class Pagamento {
 
     @Id

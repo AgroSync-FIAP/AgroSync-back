@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tb_empresa")
+@Table(name = "tb_as_empresa")
 public class Company {
 
     @Id
