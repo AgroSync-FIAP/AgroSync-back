@@ -3,6 +3,8 @@ package br.com.agrosync.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.agrosync.dto.UserRegisterDTO;
+import br.com.agrosync.repository.LoginRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private LoginRepository loginRepository;
+
     @GetMapping
     public ResponseEntity<List<User>> listarUsers() {
         List<User> users = userRepository.findAll();
@@ -44,9 +49,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> criarUser(@Valid @RequestBody User user) {
-        User novoUser = userRepository.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoUser);
+    public ResponseEntity<User> registerUser(@Valid @RequestBody UserRegisterDTO userDto) {
+        User newUser = new User(userDto);
+        loginRepository.save(newUser.getLogin());
+        userRepository.save(newUser);
+        newUser.getLogin().setUser(newUser);
+        loginRepository.save(newUser.getLogin());
+        System.out.println("User registered");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")

@@ -16,13 +16,15 @@ import br.com.agrosync.models.SuplyChain;
 import br.com.agrosync.repository.SuplyChainRepository;
 import jakarta.validation.Valid;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/agrosync/suplychain")
 public class SuplayChainController {
 
     @Autowired
     private SuplyChainRepository suplychainRepository;
-
 
     @PostMapping
     public ResponseEntity<SuplyChain> criarSuplyChain(@RequestBody @Valid SuplyChain suplychain) {
@@ -35,6 +37,11 @@ public class SuplayChainController {
         return suplychainRepository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<SuplyChain>> findAll() {
+        return ResponseEntity.ok().body(suplychainRepository.findAll());
     }
 
     @PutMapping("/{id}")

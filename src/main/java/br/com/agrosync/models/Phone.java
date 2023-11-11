@@ -1,5 +1,6 @@
 package br.com.agrosync.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,6 +36,13 @@ public class Phone {
 
     @ManyToOne
     @JoinColumn(name = "id_user")
+    @JsonIgnore
     private User user;
+
+    public Phone(String ddd, String ddi, String numero) {
+        this.ddd = Long.decode(ddd);
+        this.ddi = Long.decode(ddi);
+        this.numero = numero;
+    }
 
 }

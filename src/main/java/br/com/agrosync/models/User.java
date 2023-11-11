@@ -3,6 +3,7 @@ package br.com.agrosync.models;
 import java.time.LocalDate;
 import java.util.List;
 
+import br.com.agrosync.dto.UserRegisterDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -48,17 +49,16 @@ public class User {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_gender", length = 20, nullable = false)
+    @Column(name = "user_gender", length = 20)
     private Gender gender;
-    
 
     @Column(name = "user_email", length = 100, nullable = false)
     @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Email must be valid")
+    //@Email(message = "Email must be valid")
     private String email;
 
-    @Column(name = "user_cpf", nullable = false)
-    @NotNull(message = "CPF cannot be null")
+    @Column(name = "user_cpf")
+    //@NotNull(message = "CPF cannot be null")
     private Long cpf;
 
     @Column(name = "user_birth_date", nullable = false)
@@ -69,14 +69,20 @@ public class User {
     @NotNull(message = "Registro não pode ser nulo")
     private LocalDate registrationDate;
 
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Phone> phones;
 
     @Column(name = "user_cnpj")
     private String cnpj;
-
-    public String getBirthDate() {
-        return null;
+    
+    public User(UserRegisterDTO userRegisterDTO) {
+        this.name = userRegisterDTO.getName();
+        this.email = userRegisterDTO.getEmail();
+        this.birthDate = userRegisterDTO.getBirthday();
+        this.registrationDate = LocalDate.now();
+        this.login  = new Login(userRegisterDTO.getEmail(), userRegisterDTO.getPassword());
+        this.phones = List.of(new Phone(userRegisterDTO.getPhone().getDDD(),
+                                        userRegisterDTO.getPhone().getDDI(),
+                                        userRegisterDTO.getPhone().getNumber()));
     }
 }

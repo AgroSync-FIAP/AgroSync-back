@@ -2,6 +2,7 @@ package br.com.agrosync.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,6 +64,7 @@ public class Company {
 
     @OneToOne
     @JoinColumn(name = "id_user")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, orphanRemoval = true)
